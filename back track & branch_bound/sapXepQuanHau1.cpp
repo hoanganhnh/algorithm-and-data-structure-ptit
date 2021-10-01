@@ -3,7 +3,7 @@
 using namespace std;
 
 int X[100], n, count = 0;
-bool cot[100], cheoXuoi[100], cheoNguoc[100];
+bool cot[21], cheoXuoi[21], cheoNguoc[21];
 
 void init() {
     cin >> n;
@@ -15,14 +15,6 @@ void init() {
         cheoXuoi[i] = true;
         cheoNguoc[i] = true;
     }
-}
-
-void output() {
-    count++;
-    for (int i = 1; i <= n; i++) {
-        cout << X[i] << " ";
-    }
-    cout << endl;
 }
 
 void Try(int i) {
@@ -48,9 +40,9 @@ int main() {
     int test;
     cin >> test;
     while(test-- ) {
+        count = 0;
         init();
         Try(1);
-        cout << count;
-        cout << endl;
+        cout << count << endl;
     }
 }

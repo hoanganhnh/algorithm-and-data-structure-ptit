@@ -2,45 +2,45 @@
 
 using namespace std;
 
-int indexArr[100], value[100];
-int n;
-int sum = 0;
-int temp;
-bool checkNum = false;
+int n, a[105], ok, sum;
 
-void Try(int i) {
-    for (int j = 0; j <= 1; j++) {
-        indexArr[i] = j;
-        temp += indexArr[i] * value[i];
-        if (temp == sum /2) {
-            checkNum = true;
-            return;
-        } 
-        if (temp < sum / 2) {
-            Try(i + 1);
-        }
-        // temp -= indexArr[i] * value[i];
+void Try(int i, int s) {
+    if (s == sum / 2) {
+        ok = 1;
+        return;
     }
+
+    if (ok) return;
+
+    for (int j = i; j <= n; j++) {
+        if (s + a[j] <= sum / 2) {
+            Try(i + 1, s + a[j]);
+        }
+    }
+}
+
+void resolve() {
+    cin >> n;
+    ok = 0;
+    sum = 0;
+    
+    for (int i = 1; i <= n; i++) {
+        cin >> a[i];
+        sum += a[i];
+    }
+    if (sum % 2 == 1) {
+        cout << "NO" << endl;
+        return;
+    }
+    Try(1, 0);
+    if (ok) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
 
 int main() {
     int test;
     cin >> test;
     while(test--) {
-        cin >> n;
-        
-        for (int i = 1; i <= n; i++) {
-            cin >> value[i];
-            sum += value[i];
-        }
-        if (sum % 2 != 0) {
-            cout << "NO" << endl;
-        } else {
-            Try(1);
-            if (checkNum) cout << "YES" << endl;
-            else cout << "NO" << endl;
-            checkNum = false;
-        }
-        
+        resolve();
     }
 }
