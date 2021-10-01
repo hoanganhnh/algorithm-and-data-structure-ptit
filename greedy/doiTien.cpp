@@ -26,10 +26,6 @@ int main() {
     cin >> test;
     while(test--) {
         resolve();
-        // for (int i = 0; i < count_money.size(); i++) {
-        //     cout << count_money[i] << " ";
-        // }
-        // cout << endl;
         cout << n << endl;
         count_money.clear();
         n = 0;
