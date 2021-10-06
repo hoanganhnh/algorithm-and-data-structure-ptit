@@ -2,36 +2,32 @@
 
 using namespace std;
 
-vector<long long> x, y, z, value;
+vector<long long> x, y, z;
 int n, m ,k;
 
 void inputArr(vector<long long> &a, int n) {
     for (int i = 0; i < n; i++) {
-        long long t;
+        int t;
         cin >> t;
         a.push_back(t);
     }
 }
 
-bool includeElement(vector<long long> &a, long long n) {
+vector<long long> findSubsequence(vector<long long> &a, vector<long long> &b) {
+    vector<long long> temp;
+    long long A[a.size()];
+    long long B[b.size()];
+    memset(A, 1, sizeof A);
+    memset(B, 1, sizeof B);
     for (int i = 0; i < a.size(); i++) {
-        if (a[i] == n) {
-            return true;
+        for (int j = 0; j < b.size(); j++) {
+            if (a[i] == b[j] && A[i] && B[j]) {
+                temp.push_back(b[j]);
+                A[i] = B[j] = 0;
+            }
         }
     }
-    return false;
-}
-
-vector<long long> findMinTwoArr(vector<long long> &a, vector<long long> &b) {
-    if (a.size() < b.size()) {
-        return a;
-    }
-    return b;
-}
-
-vector<long long> findMinThreeArr(vector<long long> &a, vector<long long> &b, vector<long long> &c) {
-    vector<long long> k = findMinTwoArr(a, b);
-    return findMinTwoArr(k , c);
+    return temp;
 }
 
 void init() {
@@ -40,25 +36,21 @@ void init() {
     inputArr(y, m);
     inputArr(z, k);
 
-    vector<long long> minArr = findMinThreeArr(x, y, z);
+    vector<long long> h = findSubsequence(x, y);
+    vector<long long> minArr = findSubsequence(h, z);
+    if (minArr.size()) {
 
-    for (int i = 0; i < minArr.size(); i++) {
-        int temp = minArr[i];
-        if (includeElement(x, temp) && includeElement(y, temp) && includeElement(z, temp)) {
-            if (!includeElement(value, temp))
-                value.push_back(temp);
+        for (int i = 0; i < minArr.size(); i++) {
+            cout << minArr[i] << " ";
         }
+    } else {
+        cout << "NO";
     }
 
-    for (int i = 0; i < value.size(); i++) {
-        cout << value[i] << " ";
-    }
-    if (!value.size()) cout << "NO";
     cout << "\n";
     x.clear();
     y.clear();
     z.clear();
-    value.clear();
 }
 
 int main() {
