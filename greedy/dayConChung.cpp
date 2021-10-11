@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-
+/**
+ *@FIXME
+*/
 vector<long long> x, y, z;
 int n, m ,k;
 
