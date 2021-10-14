@@ -6,7 +6,7 @@ void resolve() {
     int n;
     cin >> n;
     int arr[n][n];
-    for (int i = 1; i <= n; i++) { // khởi tạo mảng đầu tiên
+    for (int i = 1; i <= n; i++) {
         cin >> arr[1][i];
     }
 
