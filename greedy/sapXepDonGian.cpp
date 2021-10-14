@@ -1,28 +1,40 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+/**
+ *@FIXME
+*/
 
 int n;
-int a[100005];
 
-int resolve() {
-    int L[n];
-    L[0] = 1
-
-    for (int i = 1; i < n; i++) {
-        L[i] = 1;
-        for (int j = 0; j < i; j++) {
-            if (a[j] < a[i] && L[i] < L[j] + 1) {
-                L[i] = L[j] + 1;
-            }
+int longest_increasing_subsequence(vector<int>& arr) {
+    vector<int> ans;
+    int n = arr.size();
+    for (int i = 0; i < n; i++) {
+        auto it = lower_bound(ans.begin(), ans.end(), arr[i]);
+        if (it == ans.end()) {
+            ans.push_back(arr[i]);
+        }
+        else {
+            *it = arr[i];
         }
     }
-    
-    return *max_element(L, L + n);
+    return ans.size();
+}
+
+void resolve() {
+    cin >> n;
+    vector<int> a;
+    for (int i = 0; i < n; i++) {
+        int t;
+        cin >> t;
+        a.push_back(t);
+    }
+
+    int res = longest_increasing_subsequence(a);
+    cout << n - res << endl;
 }
 
 int main() {
-    cin >> n;
-    for (int i = 0; i < n; i++) cin >> a[i];
-    cout << n - resolve() << endl;
+    resolve();
 }
