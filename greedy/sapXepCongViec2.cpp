@@ -41,7 +41,7 @@ void resolve() {
         }
     }
 
-    cout << cnt << " " << res << endl;
+    cout << "(" << cnt << ": " << res  << ")" << endl;
 }
 
 int main() {
