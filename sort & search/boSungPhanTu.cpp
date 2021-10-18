@@ -17,13 +17,12 @@ int main() {
         
         sort(a, a + n);
 
-        int min = a[0], max = a[n - 1];
-        int cnt = 0;
-
-        for (int j = min; j <= max; j++) {
-            cnt++;
+        int min = a[0], max = a[n - 1], cnt = 1;
+        
+        for (int i = 1; i < n; i++) {
+            if (a[i] != a[i - 1]) cnt++;
         }
         
-        cout << cnt - n << endl;
+        cout << max - min + 1 - cnt << endl;
     }
 }
