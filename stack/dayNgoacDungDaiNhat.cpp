@@ -2,6 +2,13 @@
 
 using namespace std;
 
+/**
+ * b1: khởi tạo phần tử đầu tiên trong stack -1
+ * b2: push địa chỉ phẩn từ = (
+ * b3: nếu phần từ = ) -> pop stack & lấy địa chỉ phần tử hiện tại - stack.top()
+ * 
+ */
+
 int main() {
     int t;
     cin >> t;
