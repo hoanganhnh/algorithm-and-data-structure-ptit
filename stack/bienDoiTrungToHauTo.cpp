@@ -1,31 +1,50 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-/*
-    @FIXME
-*/
 
+int oprt(char c) {
+    switch (c) {
+        case '+':
+        case '-':
+            return 1;
+        case '*':
+        case '/':
+            return 2;
+        case '^':
+            return 3;
+    }
+    return -1;
+}
 
 string convert(string s) {
-    stack<string> st;
-    for (int i = s.length() - 1; i >= 0; i--) {
-        if (isContain(s[i])) {
-            string first = st.top();
-            st.pop();
-            string t = first + s[i];
-            st.push(t);
-        } else if (!checkNgoac(s[i])) {
-            if (st.empty()) {
-                st.push(string (1, s[i])); /*convert char -> string*/
-            } else {
-                string second = st.top();
+    stack<char> st;
+    string res = "";
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] == ')') {
+            while (!st.empty() && st.top() != '(') {
+                res += st.top();
                 st.pop();
-                string t = s[i] + second;
-                st.push(t);
             }
+            st.pop();
+        } else if (s[i] == '(') {
+            st.push('(');
+        } else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/' || s[i] == '^') {
+            while (!st.empty() && oprt(s[i]) <= oprt(st.top())) {
+                res += st.top();
+                st.pop();
+            }
+            st.push(s[i]);
+        } else {
+            res += s[i];
         }
     }
-    return st.top();
+    while (!st.empty()) {
+        if (st.top() != '(') {
+            res += st.top();
+        }
+        st.pop();
+    }
+    return res;
 }
 
 int main() {
