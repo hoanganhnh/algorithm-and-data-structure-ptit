@@ -13,7 +13,6 @@ void init() {
         int x, y;
         cin >> x >> y;
         adj[x].push_back(y);
-        // adj[y].push_back(x);
     }
 }
 

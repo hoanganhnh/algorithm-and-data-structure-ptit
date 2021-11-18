@@ -35,7 +35,7 @@ void BFS(int k) {
     }
 }
 
-void findPath(int s, int t) {
+void findPath(int s, int t) {/* c1 */
     memset(visited, false, sizeof(visited));
     memset(parent, 0, sizeof(parent));
     BFS(s);
@@ -57,12 +57,35 @@ void findPath(int s, int t) {
     }
 }
 
+void findPathGarph(int s, int e) { /* c2 */
+    memset(visited, false, sizeof(visited));
+    memset(parent, 0, sizeof(parent));
+    BFS(s);
+
+    if (!visited[e]) {
+        cout << - 1 << endl;
+    } else {
+        stack<int> st;
+        st.push(e);
+        while (st.top() != s) {
+            int top = st.top();
+            st.push(parent[top]);
+        }
+
+        while (!st.empty()) {
+            int top = st.top();
+            st.pop();
+            cout << top << " ";
+        }
+    }
+}
+
 int main() {
     int test;
     cin >> test;
     while (test--) {
         init();
-        findPath(s, t);
+        findPathGarph(s, t);
         for (int i = 0; i < 1002; i++) {
             adj[i].clear();
         }
